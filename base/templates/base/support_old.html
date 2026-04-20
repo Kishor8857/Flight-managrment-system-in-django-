@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+
+{% block title %}Support - Flight Management System{% endblock %}
+
+{% block page_title %}Customer Support{% endblock %}
+
+{% block page_subtitle %}Get help with your queries and concerns{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-6 mb-4">
+        <div class="card">
+            <div class="card-header" style="background-color: #667eea;">
+                <h5 class="mb-0"><i class="fas fa-question-circle"></i> Frequently Asked Questions</h5>
+            </div>
+            <div class="card-body">
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                How do I book a flight?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Go to the Booking page, select your desired flight, fill in your details, choose your seat class, and confirm your booking.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                Can I cancel my booking?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Yes, you can cancel your booking from the Booking History page up to 24 hours before departure.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                What documents do I need for booking?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                You'll need a valid email, 10-digit phone number, and 12-digit Aadhar/ID number for booking.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                What payment methods are accepted?
+                            </button>
+                        </h2>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                We accept all major credit cards, debit cards, and digital payment methods like Google Pay and PhonePe.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6 mb-4">
+        <div class="card">
+            <div class="card-header" style="background-color: #667eea;">
+                <h5 class="mb-0"><i class="fas fa-headset"></i> Contact Us</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-4">
+                    <h6><i class="fas fa-phone" style="color: #667eea;"></i> Call Us</h6>
+                    <p>
+                        <a href="tel:+18005344258" class="text-decoration-none">+1 (800) 534-4258</a><br>
+                        <small class="text-muted">Available 24/7</small>
+                    </p>
+                </div>
+
+                <div class="mb-4">
+                    <h6><i class="fas fa-envelope" style="color: #667eea;"></i> Email Us</h6>
+                    <p>
+                        <a href="mailto:support@flightmgmt.com" class="text-decoration-none">support@flightmgmt.com</a><br>
+                        <small class="text-muted">Response within 24 hours</small>
+                    </p>
+                </div>
+
+                <div class="mb-4">
+                    <h6><i class="fas fa-map-marker-alt" style="color: #667eea;"></i> Visit Us</h6>
+                    <p>
+                        123 Aviation Way<br>
+                        Flight City, FC 12345<br>
+                        <small class="text-muted">Monday - Friday: 9 AM - 6 PM</small>
+                    </p>
+                </div>
+
+                <div>
+                    <h6><i class="fas fa-comments" style="color: #667eea;"></i> Live Chat</h6>
+                    <p>
+                        <button class="btn btn-primary btn-sm"><i class="fas fa-comments"></i> Start Chat</button><br>
+                        <small class="text-muted">Available during business hours</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header" style="background-color: #667eea;">
+                <h5 class="mb-0"><i class="fas fa-envelope"></i> Send us a Message</h5>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Your Name</label>
+                            <input type="text" class="form-control" placeholder="Name" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Your Email</label>
+                            <input type="email" class="form-control" placeholder="Email" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Subject</label>
+                        <input type="text" class="form-control" placeholder="Subject" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Message</label>
+                        <textarea class="form-control" rows="5" placeholder="Your message here..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

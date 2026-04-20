@@ -1,0 +1,19 @@
+<!-- Breadcrumb Component -->
+<!-- Usage: {% include 'includes/breadcrumb.html' %} -->
+
+{% if breadcrumb_items %}
+<div class="container-large">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'base:home' %}">Home</a></li>
+            {% for item in breadcrumb_items %}
+                {% if item.url %}
+                    <li class="breadcrumb-item"><a href="{{ item.url }}">{{ item.label }}</a></li>
+                {% else %}
+                    <li class="breadcrumb-item active">{{ item.label }}</li>
+                {% endif %}
+            {% endfor %}
+        </ol>
+    </nav>
+</div>
+{% endif %}

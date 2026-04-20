@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Flight - Flight Management System{% endblock %}
+
+{% block page_title %}✏️ Edit Flight{% endblock %}
+
+{% block page_subtitle %}Update flight details{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div style="background: white; border-left: 5px solid #28a745; padding: 30px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+            <h3 style="color: #28a745; margin-bottom: 25px; font-weight: 700;">✏️ Update Flight {{ flight.flight_no }}</h3>
+            
+            <form method="POST">
+                {% csrf_token %}
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label style="color: #666; font-weight: 600; display: block; margin-bottom: 5px;">{{ form.flight_company.label }} <span style="color: red;">*</span></label>
+                            {{ form.flight_company }}
+                            {% if form.flight_company.errors %}
+                                <small style="color: red;">{{ form.flight_company.errors.0 }}</small>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label style="color: #666; font-weight: 600; display: block; margin-bottom: 5px;">{{ form.flight_name.label }} <span style="color: red;">*</span></label>
+                            {{ form.flight_name }}
+                            {% if form.flight_name.errors %}
+                                <small style="color: red;">{{ form.flight_name.errors.0 }}</small>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label style="color: #666; font-weight: 600; display: block; margin-bottom: 5px;">{{ form.flight_no.label }} <span style="color: red;">*</span></label>
+                            {{ form.flight_no }}
+                            <small style="color: #999;">Cannot be changed</small>
+                            {% if form.flight_no.errors %}
+                                <small style="color: red;">{{ form.flight_no.errors.0 }}</small>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label style="color: #666; font-weight: 600; display: block; margin-bottom: 5px;">{{ form.from_city.label }} <span style="color: red;">*</span></label>
+                            {{ form.from_city }}
+                            {% if form.from_city.errors %}
+                                <small style="color: red;">{{ form.from_city.errors.0 }}</small>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label style="color: #666; font-weight: 600; display: block; margin-bottom: 5px;">{{ form.to_city.label }} <span style="color: red;">*</span></label>
+                            {{ form.to_city }}
+                            {% if form.to_city.errors %}
+                                <small style="color: red;">{{ form.to_city.errors.0 }}</small>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label style="color: #666; font-weight: 600; display: block; margin-bottom: 5px;">{{ form.departure_date.label }} <span style="color: red;">*</span></label>
+                            {{ form.departure_date }}
+                            {% if form.departure_date.errors %}
+                                <small style="color: red;">{{ form.departure_date.errors.0 }}</small>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label style="color: #666; font-weight: 600; display: block; margin-bottom: 5px;">{{ form.departure_time.label }} <span style="color: red;">*</span></label>
+                            {{ form.departure_time }}
+                            {% if form.departure_time.errors %}
+                                <small style="color: red;">{{ form.departure_time.errors.0 }}</small>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label style="color: #666; font-weight: 600; display: block; margin-bottom: 5px;">{{ form.price.label }} <span style="color: red;">*</span></label>
+                            {{ form.price }}
+                            {% if form.price.errors %}
+                                <small style="color: red;">{{ form.price.errors.0 }}</small>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label style="color: #666; font-weight: 600; display: block; margin-bottom: 5px;">{{ form.available_seats.label }} <span style="color: red;">*</span></label>
+                            {{ form.available_seats }}
+                            {% if form.available_seats.errors %}
+                                <small style="color: red;">{{ form.available_seats.errors.0 }}</small>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 30px;">
+                    <button type="submit" class="btn" style="background-color: #28a745; color: white; border: none; padding: 12px 30px; font-weight: 600; cursor: pointer; border-radius: 4px; font-size: 16px;">✓ Update Flight</button>
+                    <a href="{% url 'base:add-flight' %}" class="btn" style="background-color: #6c757d; color: white; border: none; padding: 12px 30px; font-weight: 600; text-decoration: none; display: inline-block; cursor: pointer; border-radius: 4px; margin-left: 10px;">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

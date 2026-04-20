@@ -1,0 +1,72 @@
+<!-- Navigation Component -->
+<!-- Usage: {% include 'includes/navbar.html' %} -->
+
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1e3a5f;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'base:home' %}">
+            <i class="fas fa-plane"></i> Flight Management
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link {% if page == 'home' %}active{% endif %}" href="{% url 'base:home' %}">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </li>
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link {% if page == 'booking' %}active{% endif %}" href="{% url 'base:booking' %}">
+                        <i class="fas fa-ticket-alt"></i> Booking
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if page == 'history' %}active{% endif %}" href="{% url 'base:history' %}">
+                        <i class="fas fa-history"></i> History
+                    </a>
+                </li>
+                {% if request.user.is_staff %}
+                <li class="nav-item">
+                    <a class="nav-link {% if page == 'admin' %}active{% endif %}" href="{% url 'base:add-flight' %}">
+                        <i class="fas fa-cog"></i> Manage Flights
+                    </a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link {% if page == 'profile' %}active{% endif %}" href="{% url 'base:profile' %}">
+                        <i class="fas fa-user"></i> Profile ({{ request.user.username }})
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'base:logout' %}">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link {% if page == 'login' %}active{% endif %}" href="{% url 'base:login' %}">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if page == 'register' %}active{% endif %}" href="{% url 'base:register' %}">
+                        <i class="fas fa-user-plus"></i> Register
+                    </a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link {% if page == 'support' %}active{% endif %}" href="{% url 'base:support' %}">
+                        <i class="fas fa-headset"></i> Support
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if page == 'about' %}active{% endif %}" href="{% url 'base:about' %}">
+                        <i class="fas fa-info-circle"></i> About
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

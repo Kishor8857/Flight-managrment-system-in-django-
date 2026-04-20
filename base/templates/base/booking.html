@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+
+{% block title %}Booking - Flight Management System{% endblock %}
+
+{% block page_title %}Book Your Flight{% endblock %}
+
+{% block page_subtitle %}Select a flight and complete your booking{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-lg-8 mx-auto">
+        <form method="GET" action="{% url 'base:booking' %}" style="background: #f0f4f8; padding: 20px; border-radius: 8px;">
+            <div class="row">
+                <div class="col-md-5">
+                    <label style="color: #333; font-weight: 600; display: block; margin-bottom: 8px;">From</label>
+                    <input type="text" name="from_city" class="form-control" placeholder="Enter Departure City" style="border: 1px solid #ddd; padding: 10px;">
+                </div>
+                <div class="col-md-5">
+                    <label style="color: #333; font-weight: 600; display: block; margin-bottom: 8px;">To</label>
+                    <input type="text" name="to_city" class="form-control" placeholder="Enter Destination City" style="border: 1px solid #ddd; padding: 10px;">
+                </div>
+                <div class="col-md-2" style="display: flex; align-items: flex-end;">
+                    <button type="submit" class="btn btn-primary w-100" style="background-color: #0066cc; border: none; padding: 10px; font-weight: 600;">Search Flights</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <h3 style="color: #0066cc; margin-bottom: 20px; font-weight: 700;">Available Flights</h3>
+        
+        {% if flights %}
+            {% for flight in flights %}
+            <div style="background: white; border-left: 5px solid #0066cc; padding: 20px; margin-bottom: 15px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <div class="row align-items-center">
+                    <div class="col-md-3">
+                        <h5 style="color: #0066cc; margin: 0; font-weight: 700;">{{ flight.flight_company }}</h5>
+                        <p style="color: #666; font-size: 14px; margin: 5px 0;">{{ flight.flight_name }}</p>
+                        <p style="color: #999; font-size: 12px; margin: 0;">Flight No: {{ flight.flight_no }}</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p style="color: #333; margin: 5px 0; font-weight: 600;"><strong>From:</strong> {{ flight.from_city }}</p>
+                        <p style="color: #333; margin: 5px 0; font-weight: 600;"><strong>To:</strong> {{ flight.to_city }}</p>
+                    </div>
+                    <div class="col-md-2" style="text-align: center;">
+                        <p style="color: #666; font-size: 12px; margin: 5px 0;">Departure</p>
+                        <p style="color: #333; font-weight: 600; margin: 0;">{{ flight.departure_time|time:"H:i" }}</p>
+                        <p style="color: #666; font-size: 12px; margin: 5px 0;">{{ flight.departure_date|date:"d M, Y" }}</p>
+                    </div>
+                    <div class="col-md-2" style="text-align: right;">
+                        <p style="color: #999; font-size: 12px; margin: 5px 0;">Price</p>
+                        <p style="color: #0066cc; font-size: 20px; font-weight: 700; margin: 0;">₹{{ flight.price }}</p>
+                    </div>
+                    <div class="col-md-2" style="text-align: right;">
+                        <button class="btn btn-success btn-sm w-100" data-bs-toggle="modal" data-bs-target="#bookingModal{{ flight.id }}" style="background-color: #28a745; border: none; padding: 8px 12px; font-size: 12px; font-weight: 600;">Book Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Booking Modal -->
+            <div class="modal fade" id="bookingModal{{ flight.id }}" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color: #0066cc; color: white;">
+                            <h5 class="modal-title" style="font-weight: 700;">✈ Plane Ticket Booking Form</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+                        <form method="POST" action="{% url 'base:booking' %}">
+                            {% csrf_token %}
+                            <div class="modal-body">
+                                <input type="hidden" name="flight_id" value="{{ flight.id }}">
+                                <h6 style="color: #0066cc; font-weight: 700; border-bottom: 2px solid #0066cc; padding-bottom: 10px; margin-bottom: 15px;">Flight Details</h6>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label" style="font-weight: 600; color: #333;">Flight Company</label>
+                                        <input type="text" class="form-control" value="{{ flight.flight_company }}" disabled style="background-color: #f0f0f0; border: 1px solid #ddd;">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label" style="font-weight: 600; color: #333;">Flight Name</label>
+                                        <input type="text" class="form-control" value="{{ flight.flight_name }}" disabled style="background-color: #f0f0f0; border: 1px solid #ddd;">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label" style="font-weight: 600; color: #333;">Flight Number</label>
+                                        <input type="text" class="form-control" value="{{ flight.flight_no }}" disabled style="background-color: #f0f0f0; border: 1px solid #ddd;">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label" style="font-weight: 600; color: #333;">From</label>
+                                        <input type="text" class="form-control" value="{{ flight.from_city }}" disabled style="background-color: #f0f0f0; border: 1px solid #ddd;">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label" style="font-weight: 600; color: #333;">To</label>
+                                        <input type="text" class="form-control" value="{{ flight.to_city }}" disabled style="background-color: #f0f0f0; border: 1px solid #ddd;">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label" style="font-weight: 600; color: #333;">Price</label>
+                                        <input type="text" class="form-control" value="₹{{ flight.price }}" disabled style="background-color: #f0f0f0; border: 1px solid #ddd;">
+                                    </div>
+                                </div>
+
+                                <h6 style="color: #0066cc; font-weight: 700; border-bottom: 2px solid #0066cc; padding-bottom: 10px; margin-bottom: 15px; margin-top: 20px;">Passenger Details</h6>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label" style="font-weight: 600; color: #333;">Passenger Name *</label>
+                                        <input type="text" class="form-control" name="passenger_name" placeholder="Full Name" required style="border: 1px solid #ddd;">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label" style="font-weight: 600; color: #333;">Age *</label>
+                                        <input type="number" class="form-control" name="age" placeholder="Age" min="1" required style="border: 1px solid #ddd;">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label" style="font-weight: 600; color: #333;">Email *</label>
+                                        <input type="email" class="form-control" name="email" placeholder="Email" required style="border: 1px solid #ddd;">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label" style="font-weight: 600; color: #333;">Phone No (10 digits) *</label>
+                                        <input type="text" class="form-control" name="phone_no" placeholder="10-digit phone" pattern="[0-9]{10}" maxlength="10" required style="border: 1px solid #ddd;">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label" style="font-weight: 600; color: #333;">Aadhar No (12 digits) *</label>
+                                        <input type="text" class="form-control" name="adhar_no" placeholder="12-digit Aadhar" pattern="[0-9]{12}" maxlength="12" required style="border: 1px solid #ddd;">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label" style="font-weight: 600; color: #333;">Seat Class *</label>
+                                        <select class="form-select" name="seat_class" required style="border: 1px solid #ddd;">
+                                            <option value="">Select Seat Class</option>
+                                            <option value="economy">Economy</option>
+                                            <option value="business">Business</option>
+                                            <option value="first">First Class</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label" style="font-weight: 600; color: #333;">Seat Number *</label>
+                                        <input type="text" class="form-control" name="seat_no" placeholder="e.g., 12A" required style="border: 1px solid #ddd;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer" style="background-color: #f0f4f8;">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background-color: #666; border: none;">Cancel</button>
+                                <button type="submit" class="btn btn-primary" style="background-color: #0066cc; border: none; padding: 10px 20px; font-weight: 600;">Confirm Booking</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+        <div style="background: #fff3cd; padding: 15px; border-radius: 4px; color: #856404;">
+            No flights available for booking.
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

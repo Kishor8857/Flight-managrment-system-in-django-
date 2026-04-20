@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Booking History - Flight Management System{% endblock %}
+
+{% block page_title %}Your Bookings{% endblock %}
+
+{% block page_subtitle %}View your booking history{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <h3 style="color: #0066cc; margin-bottom: 20px; font-weight: 700;">Bookings</h3>
+        
+        {% if bookings %}
+            {% for booking in bookings %}
+            <div style="background: white; border-left: 5px solid #0066cc; padding: 20px; margin-bottom: 15px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <div class="row align-items-start">
+                    <div class="col-md-4">
+                        <h5 style="color: #0066cc; margin: 0 0 10px 0; font-weight: 700;">{{ booking.passenger_name }}</h5>
+                        <p style="color: #666; font-size: 13px; margin: 3px 0;"><strong>Aadhar:</strong> {{ booking.adhar_no }}</p>
+                        <p style="color: #666; font-size: 13px; margin: 3px 0;"><strong>Age:</strong> {{ booking.age }}</p>
+                        <p style="color: #666; font-size: 13px; margin: 3px 0;"><strong>Seat Class:</strong> {{ booking.seat_class|upper }}</p>
+                        <p style="color: #666; font-size: 13px; margin: 3px 0;"><strong>Seat Number:</strong> {{ booking.seat_no }}</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h6 style="color: #0066cc; font-weight: 700; margin: 0 0 8px 0;">{{ booking.flight_company }}</h6>
+                        <p style="color: #666; font-size: 13px; margin: 3px 0;"><strong>Flight No:</strong> {{ booking.flight_no }}</p>
+                        <p style="color: #666; font-size: 13px; margin: 3px 0;"><strong>From:</strong> {{ booking.from_city }}</p>
+                        <p style="color: #666; font-size: 13px; margin: 3px 0;"><strong>To:</strong> {{ booking.to_city }}</p>
+                    </div>
+                    <div class="col-md-2" style="text-align: center;">
+                        <p style="color: #999; font-size: 12px; margin: 5px 0;">Departure</p>
+                        <p style="color: #333; font-weight: 600; margin: 5px 0;">{{ booking.departure_time|time:"H:i" }}</p>
+                        <p style="color: #666; font-size: 12px; margin: 5px 0;">{{ booking.departure_date|date:"d M, Y" }}</p>
+                    </div>
+                    <div class="col-md-2" style="text-align: right;">
+                        <p style="color: #999; font-size: 12px; margin: 5px 0;">Phone No</p>
+                        <p style="color: #333; font-size: 13px; font-weight: 600; margin: 5px 0;">{{ booking.phone_no }}</p>
+                        <p style="color: #999; font-size: 12px; margin: 5px 0;">Email</p>
+                        <p style="color: #333; font-size: 12px; margin: 5px 0;">{{ booking.email }}</p>
+                    </div>
+                    <div class="col-md-2" style="text-align: right;">
+                        <p style="color: #999; font-size: 12px; margin: 5px 0;">Price</p>
+                        <p style="color: #0066cc; font-size: 18px; font-weight: 700; margin: 5px 0;">₹{{ booking.price }}</p>
+                        <div style="margin-top: 10px;">
+                            <button class="btn btn-success btn-sm" style="background-color: #28a745; border: none; padding: 6px 10px; font-size: 12px; margin-right: 5px;">Update Details</button>
+                            <button class="btn btn-danger btn-sm" style="background-color: #dc3545; border: none; padding: 6px 10px; font-size: 12px;">Cancel Booking</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+        <div style="background: #d1ecf1; padding: 15px; border-radius: 4px; color: #0c5460;">
+            No bookings found. <a href="{% url 'base:booking' %}">Book a flight now</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

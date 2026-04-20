@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block title %}Support - Flight Management System{% endblock %}
+
+{% block page_title %}Support Center{% endblock %}
+
+{% block page_subtitle %}We are here to help you{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <h3 style="color: #0066cc; margin-bottom: 20px; font-weight: 700;">Frequently Asked Questions</h3>
+        
+        <div class="accordion" id="faqAccordion" style="margin-bottom: 30px;">
+            <div class="accordion-item" style="border: 1px solid #ddd; margin-bottom: 10px;">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" style="background-color: #f0f4f8; font-weight: 600; color: #0066cc;" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                        How do I book a flight?
+                    </button>
+                </h2>
+                <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body" style="background-color: white;">
+                        Go to the Booking page, select your preferred flight, fill in your passenger details, choose your seat class, and confirm the booking. Your booking will be confirmed immediately.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item" style="border: 1px solid #ddd; margin-bottom: 10px;">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" style="background-color: #f0f4f8; font-weight: 600; color: #0066cc;" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                        Can I cancel my booking?
+                    </button>
+                </h2>
+                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body" style="background-color: white;">
+                        Yes, you can cancel your booking from the Booking History page. A cancellation fee may apply depending on your ticket type.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item" style="border: 1px solid #ddd; margin-bottom: 10px;">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" style="background-color: #f0f4f8; font-weight: 600; color: #0066cc;" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                        What documents do I need?
+                    </button>
+                </h2>
+                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body" style="background-color: white;">
+                        You will need a valid Aadhar number and a government-issued ID for verification during check-in.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item" style="border: 1px solid #ddd;">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" style="background-color: #f0f4f8; font-weight: 600; color: #0066cc;" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                        What is your refund policy?
+                    </button>
+                </h2>
+                <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body" style="background-color: white;">
+                        Refunds are processed within 7-10 business days after cancellation. Some ticket types may have a non-refundable clause.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="color: #0066cc; margin-bottom: 20px; font-weight: 700;">Contact Us</h3>
+        
+        <div style="background: #f0f4f8; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+            <p style="color: #333; margin: 10px 0;"><strong>📞 Phone:</strong> +1 (800) 534-4258</p>
+            <p style="color: #333; margin: 10px 0;"><strong>📧 Email:</strong> support@flightmgmt.com</p>
+            <p style="color: #333; margin: 10px 0;"><strong>📍 Address:</strong> 123 Aviation Way, Flight City, USA</p>
+        </div>
+
+        <h3 style="color: #0066cc; margin-bottom: 20px; font-weight: 700;">Send Us a Message</h3>
+        
+        <form method="POST" action="{% url 'base:support' %}" style="background: white; padding: 20px; border-left: 5px solid #0066cc; border-radius: 4px;">
+            {% csrf_token %}
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label" style="font-weight: 600; color: #333;">Your Name</label>
+                    <input type="text" class="form-control" name="name" placeholder="Enter your name" style="border: 1px solid #ddd;">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" style="font-weight: 600; color: #333;">Email</label>
+                    <input type="email" class="form-control" name="email" placeholder="Enter your email" style="border: 1px solid #ddd;">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <label class="form-label" style="font-weight: 600; color: #333;">Subject</label>
+                    <input type="text" class="form-control" name="subject" placeholder="Subject" style="border: 1px solid #ddd;">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <label class="form-label" style="font-weight: 600; color: #333;">Message</label>
+                    <textarea class="form-control" name="message" rows="5" placeholder="Write your message..." style="border: 1px solid #ddd;"></textarea>
+                </div>
+            </div>
+            <button type="submit" class="btn" style="background-color: #0066cc; color: white; border: none; padding: 10px 20px; font-weight: 600;">Send Message</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
